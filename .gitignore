@@ -5,3 +5,6 @@ app/*
 !app/makefile
 lib/*
 !lib/.gitkeep
+
+#Editor
+.vscode

@@ -37,12 +37,68 @@ add_library(${PROJECT_NAME} SHARED
     src/rk_ik_imp.c
     src/rk_cd.c
     src/rk_abi.c)
+target_link_libraries(${PROJECT_NAME} zeda zm zeo)
+
+add_executable(cad2zkc app/cad2zkc.c)
+target_link_libraries(cad2zkc ${PROJECT_NAME})
+
+add_executable(zkcconv app/zkcconv.c)
+target_link_libraries(zkcconv ${PROJECT_NAME})
+
+add_executable(z3d2zkc app/z3d2zkc.c)
+target_link_libraries(z3d2zkc ${PROJECT_NAME})
+
+add_executable(zkc2z3d app/zkc2z3d.c)
+target_link_libraries(zkc2z3d ${PROJECT_NAME})
+
+add_executable(z3d2gp app/z3d2gp.c)
+target_link_libraries(z3d2gp ${PROJECT_NAME})
+
+add_executable(zvs2zkci app/zvs2zkci.c)
+target_link_libraries(zvs2zkci ${PROJECT_NAME})
+
+add_executable(zvs2zkcs app/zvs2zkcs.c)
+target_link_libraries(zvs2zkcs ${PROJECT_NAME})
+
+add_executable(rk_ground app/rk_ground.c)
+target_link_libraries(rk_ground ${PROJECT_NAME})
+
+add_executable(rk_mp app/rk_mp.c)
+target_link_libraries(rk_mp ${PROJECT_NAME})
+
+add_executable(rk_fk app/rk_fk.c)
+target_link_libraries(rk_fk ${PROJECT_NAME})
+
+add_executable(rk_ik app/rk_ik.c)
+target_link_libraries(rk_ik ${PROJECT_NAME})
+
+add_executable(rk_id app/rk_id.c)
+target_link_libraries(rk_id ${PROJECT_NAME})
+
+add_executable(rk_ikcell_merge app/rk_ikcell_merge.c)
+target_link_libraries(rk_ikcell_merge ${PROJECT_NAME})
 
 # Install
 INSTALL (
     DIRECTORY ${CMAKE_SOURCE_DIR}/include/
     DESTINATION include
     FILES_MATCHING PATTERN "*.h*")
+
+install (TARGETS 
+    cad2zkc
+    zkcconv
+    z3d2zkc
+    zkc2z3d
+    z3d2gp
+    zvs2zkci
+    zvs2zkcs
+    rk_ground 
+    rk_mp 
+    rk_fk 
+    rk_ik 
+    rk_id 
+    rk_ikcell_merge
+    RUNTIME DESTINATION bin)
 
 install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)
 
