@@ -1,0 +1,36 @@
+language: cpp
+sudo: required	
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - george-edison55-precise-backports
+    packages:
+      - cmake
+      - cmake-data
+      - libgtest-dev
+      - git
+before_script:
+  - install -d gtest_build
+  - pushd gtest_build
+  - cmake -DCMAKE_CXX_COMPILER=gcc /usr/src/gtest/
+  - make
+  - sudo cp *.a /usr/lib
+  - popd
+  - git clone https://github.com/hakuturu583/zeda.git
+  - mkdir -p zeda/build
+  - cd zeda/build && cmake ../ && sudo make install
+  - cd ../../
+  - git clone https://github.com/hakuturu583/zm.git
+  - mkdir -p zm/build
+  - cd zm/build && cmake ../ && sudo make install
+  - cd ../../
+  - git clone https://github.com/hakuturu583/zeo.git
+  - mkdir -p zeo/build
+  - cd zeo/build && cmake ../ && sudo make install
+  - cd ../../
+script:
+  - install -d build
+  - cd build
+  - cmake -DCMAKE_CXX_COMPILER=gcc ..
+  - make
